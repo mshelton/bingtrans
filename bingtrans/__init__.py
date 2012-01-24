@@ -36,7 +36,7 @@ def set_app_id(new_app_id):
 	global app_id
 	app_id = new_app_id
 
-def translate(text, source, target, html=False):
+def translate(text, source=None, target="en", html=False):
 	"""
 	action=opensearch
 	"""
@@ -45,9 +45,10 @@ def translate(text, source, target, html=False):
 	query_args = {
 		'appId': app_id,
 		'text': text,
-		'from': source,
 		'to': target,
 		'contentType': 'text/plain' if not html else 'text/html',
 		'category': 'general'
 	}
+	if source:
+		query_args['from'] = source
 	return _run_query(query_args)
